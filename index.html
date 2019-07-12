@@ -18,10 +18,27 @@
 		<link rel="stylesheet" href="css/main.css">
 	</head>
 	<body>
+		<div id="real-clock" class="clock"></div>
 		
 	</body>
 
-	<script>
-		
+	<script type="text/javascript">
+		function showRealTime(){
+			var date = new Date();
+			var h = date.getHours(); // 0-23 hours
+			var m = date.getMinutes(); // 0-59 - minutes
+			var s = date.getSeconds(); // 0-59 - seconds
+
+			var time = (h>9?h:("0"+h)) + ":" + (m>9?m:("0"+m)) + ":" + (s>9?s:("0"+s));
+			//time formatting as 2 digits
+
+			document.getElementById("real-clock").innerText = time; // may not work in Firefox
+			document.getElementById("real-clock").textContent = time; // may not work in IE
+
+			setTimeout(showRealTime,1000); // calls showRealTime after 1000 ms
+		}
+
+		showRealTime();
+
 	</script>
 </html>

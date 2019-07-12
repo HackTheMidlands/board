@@ -1,0 +1,17 @@
+/* Global Variables*/
+:root {
+	--bg-color: #2f3c63;
+	--fg-color: white;
+	--font: "Comic Sans MS";
+}
+
+body {
+	background: var(--bg-color);
+	color: var(--fg-color);
+	font-family: var(--font);
+}
+
+#real-clock {
+	position: absolute;
+	
+}
