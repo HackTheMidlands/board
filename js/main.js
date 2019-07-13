@@ -35,7 +35,7 @@ function setDisplayTimeOnly() {
 	announcementDiv.textContent = "";
 
 	//resets the size style of the clocks
-	countClock.style.margin = "20vh auto 0px auto";
+	countClock.style.margin = "7vh auto 0px auto";
 	countClock.style.fontSize = "15em";
 	realClock.style.margin = "0px auto"; 
 	realClock.style.fontSize = "3em";
