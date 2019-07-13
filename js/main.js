@@ -1,6 +1,6 @@
 // Parameters
 var endDate = new Date(2019, 9, 27, 12, 0).getTime(); //TODO Check this date //remember month is 0-indexed and day is 1-indexed
-var displayTime = 10000;
+var displayTime = 30000;
 var alertBackgroundColor = "#f15a22";
 var normalBackgroundColor = "#2f3c63";
 var alertForegroundColor = "black";
@@ -10,6 +10,7 @@ var normalForegroundColor = "white";
 var countClock = document.getElementById("count-clock");
 var realClock = document.getElementById("real-clock");
 var announcementDiv = document.getElementById("announcement");
+var bar = document.getElementById("bar");
 
 function updateTime(){
 	var dateNow = new Date();
@@ -62,6 +63,7 @@ function setDisplayTimeOnly() {
 	announcementDiv.style.display = "none";
 	announcementDiv.innerText = "";
 	announcementDiv.textContent = "";
+	bar.style.display = "none";
 
 	//resets the size style of the clocks
 	countClock.style.margin = "7vh auto 0px auto";
@@ -84,6 +86,10 @@ function announcement(announcementText) {
 	announcementDiv.style.display = "block";
 	announcementDiv.innerText = announcementText;
 	announcementDiv.textContent = announcementText;
+	
+	bar.style.animationDuration = (displayTime / 1000) + "s";
+	bar.style.backgroundColor = alertForegroundColor;
+	bar.style.display = "block";
 
 	// styles
 	countClock.style.margin = "7vh auto 0px auto";
@@ -100,8 +106,7 @@ function announcement(announcementText) {
 function main() { // the display board logic
 	updateTime(); // the timers are always updated;
 	setDisplayTimeOnly(); // always start on default display
-	announcement("Sample Announcemnt Text - long sample announcement text text text text etext text tetx text text");
-
+	setTimeout(function() {announcement("sample")}, 3000);
 	// Announcement pulling logic
 	// TODO
 }
