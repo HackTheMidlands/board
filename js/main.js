@@ -31,11 +31,23 @@ function updateTime(){
 	var hoursLeft = Math.floor((remainingTime % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60));
   	var minutesLeft = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
   	var secondsLeft = Math.floor((remainingTime % (1000 * 60)) / 1000);
-  	// 2 digit formatting for MM and SS
-  	minutesLeft = minutesLeft > 9 ? minutesLeft : "0" + minutesLeft;
-  	secondsLeft = secondsLeft > 9 ? secondsLeft : "0" + secondsLeft;
+  	
+  	if (secondsLeft < 10 && minutesLeft != 0) {
+  		secondsLeft = "0" + secondsLeft;
+  	}
+  	if (minutesLeft < 10 && hoursLeft != 0) {
+ 		minutesLeft = "0" + minutesLeft;
+   	}
+   	var timeLeft = secondsLeft;
+   	timeLeft = minutesLeft > 0 ? minutesLeft + ":" + timeLeft : timeLeft;
+   	timeLeft = hoursLeft > 0 ? hoursLeft + ":" + timeLeft : timeLeft;
 
-  	var timeLeft = hoursLeft > 0 ? (hoursLeft + ":" + minutesLeft + ":" + secondsLeft) : (minutesLeft + ":" + secondsLeft);
+   	//Above does not account for passing the end date since:
+   	if (remainingTime < 0) {
+   		timeLeft = "TIME'S UP!"; //TODO Change the wording here
+   		countClock.style.fontSize = "10em";
+   	}
+
   	countClock.innerText = timeLeft;
   	countClock.textContent = timeLeft;
 
@@ -74,7 +86,7 @@ function announcement(announcementText) {
 	announcementDiv.textContent = announcementText;
 
 	// styles
-	countClock.style.margin = "10vh auto 0px auto";
+	countClock.style.margin = "7vh auto 0px auto";
 	countClock.style.fontSize = "5em";
 
 	// alert colour
@@ -88,8 +100,10 @@ function announcement(announcementText) {
 function main() { // the display board logic
 	updateTime(); // the timers are always updated;
 	setDisplayTimeOnly(); // always start on default display
-	announcement("Sample Announcemnt Text");
-	//setTimeout(function() {announcement("Text");}, 1000);
+	announcement("Sample Announcemnt Text - long sample announcement text text text text etext text tetx text text");
+
+	// Announcement pulling logic
+	// TODO
 }
 
 main(); // always run main to start service
