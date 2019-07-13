@@ -11,7 +11,29 @@ body {
 	font-family: var(--font);
 }
 
+/* IMPORTANT: These are default values of time only display, will be overriden by JS */
+
+#count-clock {
+	display: block;
+	margin: 20vh auto 0px auto; /* top right btm left*/
+	text-align: center;
+	width: 75%;
+	font-size: 15em;
+}
+
 #real-clock {
-	position: absolute;
-	
+	display: block;
+	margin: 0px auto;
+	text-align: center;
+	width: 50%;
+	font-size: 3em;
+}
+
+#announcement {
+	display: block;
+	margin: 10vh auto;
+	text-align: center;
+	width: 90%;
+	height: 100vh;
+	font-size: 5vw;
 }
