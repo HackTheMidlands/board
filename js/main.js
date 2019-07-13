@@ -1,4 +1,5 @@
 // Parameters
+var endDate = new Date(2019, 9, 27, 12, 0).getTime(); //TODO Check this date //remember month is 0-indexed and day is 1-indexed
 var displayTime = 10000;
 var alertBackgroundColor = "#f15a22";
 var normalBackgroundColor = "#2f3c63";
@@ -11,16 +12,32 @@ var realClock = document.getElementById("real-clock");
 var announcementDiv = document.getElementById("announcement");
 
 function updateTime(){
-	var date = new Date();
-	var h = date.getHours(); // 0-23 hours
-	var m = date.getMinutes(); // 0-59 - minutes
-	var s = date.getSeconds(); // 0-59 - seconds
+	var dateNow = new Date();
+	var h = dateNow.getHours(); // 0-23 hours
+	var m = dateNow.getMinutes(); // 0-59 - minutes
+	var s = dateNow.getSeconds(); // 0-59 - seconds
 
-	var time = (h>9?h:("0"+h)) + ":" + (m>9?m:("0"+m)) + ":" + (s>9?s:("0"+s));
+	// CURRENT TIME
 	//time formatting as 2 digits
-
+	h = h > 9 ? h : "0" + h;
+	m = m > 9 ? m : "0" + m;
+	s = s > 9 ? s : "0" + s;
+	time = h + ":" + m + ":" + s;
 	realClock.innerText = time; // may not work in Firefox
 	realClock.textContent = time; // may not work in IE
+
+	// COUNTDOWN TIME
+	var remainingTime = endDate - dateNow.getTime();
+	var hoursLeft = Math.floor((remainingTime % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60));
+  	var minutesLeft = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+  	var secondsLeft = Math.floor((remainingTime % (1000 * 60)) / 1000);
+  	// 2 digit formatting for MM and SS
+  	minutesLeft = minutesLeft > 9 ? minutesLeft : "0" + minutesLeft;
+  	secondsLeft = secondsLeft > 9 ? secondsLeft : "0" + secondsLeft;
+
+  	var timeLeft = hoursLeft > 0 ? (hoursLeft + ":" + minutesLeft + ":" + secondsLeft) : (minutesLeft + ":" + secondsLeft);
+  	countClock.innerText = timeLeft;
+  	countClock.textContent = timeLeft;
 
 	setTimeout(updateTime,1000); // calls showRealTime after 1000 ms
 }
