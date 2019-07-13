@@ -12,4 +12,5 @@ Written by Likkan Chung
 * Auto fetch announcements from some source
 * Nicer display styles - colors, fonts, etc.
 * Nicer transitions between states
+* Add night mode colours
 

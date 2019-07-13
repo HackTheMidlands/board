@@ -1,3 +1,15 @@
+// Parameters
+var displayTime = 10000;
+var alertBackgroundColor = "#f15a22";
+var normalBackgroundColor = "#2f3c63";
+var alertForegroundColor = "black";
+var normalForegroundColor = "white";
+
+// Global Varibles
+var countClock = document.getElementById("count-clock");
+var realClock = document.getElementById("real-clock");
+var announcementDiv = document.getElementById("announcement");
+
 function updateTime(){
 	var date = new Date();
 	var h = date.getHours(); // 0-23 hours
@@ -7,25 +19,20 @@ function updateTime(){
 	var time = (h>9?h:("0"+h)) + ":" + (m>9?m:("0"+m)) + ":" + (s>9?s:("0"+s));
 	//time formatting as 2 digits
 
-	document.getElementById("real-clock").innerText = time; // may not work in Firefox
-	document.getElementById("real-clock").textContent = time; // may not work in IE
+	realClock.innerText = time; // may not work in Firefox
+	realClock.textContent = time; // may not work in IE
 
 	setTimeout(updateTime,1000); // calls showRealTime after 1000 ms
 }
 
 function setDisplayTimeOnly() {
-	var normalColor = "#2f3c63";
-
-	var countClock = document.getElementById("count-clock");
-	var realClock = document.getElementById("real-clock");
-	var announcement = document.getElementById("announcement");
 
 	// displays only the countdown clock and the real time clock, sets any announcement to empty string 
 	countClock.style.display = "block";
 	realClock.style.display = "block";
-	announcement.style.display = "none";
-	announcement.innerText = "";
-	announcement.textContent = "";
+	announcementDiv.style.display = "none";
+	announcementDiv.innerText = "";
+	announcementDiv.textContent = "";
 
 	//resets the size style of the clocks
 	countClock.style.margin = "20vh auto 0px auto";
@@ -34,33 +41,28 @@ function setDisplayTimeOnly() {
 	realClock.style.fontSize = "3em";
 
 	//reset page style
-	document.body.style.background = normalColor;
+	document.body.style.background = normalBackgroundColor;
+	document.body.style.color = normalForegroundColor;
 }
 
 function announcement(announcementText) {	
 	// displays the time remaining in small, and the announcement text
 	// AUTOMATICALLY RESETS AFTER TIMEOUT
-	var displayTime = 10000;
-	var alertColor = "#f15a22";
-	var normalColor = "#2f3c63";
-
-	var countClock = document.getElementById("count-clock");
-	var realClock = document.getElementById("real-clock");
-	var announcement = document.getElementById("announcement");
 
 	// set display
 	countClock.style.display = "block";
 	realClock.style.display = "none";
-	announcement.style.display = "block";
-	announcement.innerText = announcementText;
-	announcement.textContent = announcementText;
+	announcementDiv.style.display = "block";
+	announcementDiv.innerText = announcementText;
+	announcementDiv.textContent = announcementText;
 
 	// styles
 	countClock.style.margin = "10vh auto 0px auto";
 	countClock.style.fontSize = "5em";
 
 	// alert colour
-	document.body.style.background = alertColor;
+	document.body.style.background = alertBackgroundColor;
+	document.body.style.color = alertForegroundColor;
 
 	setTimeout(setDisplayTimeOnly, displayTime);
 
@@ -69,7 +71,8 @@ function announcement(announcementText) {
 function main() { // the display board logic
 	updateTime(); // the timers are always updated;
 	setDisplayTimeOnly(); // always start on default display
-	setTimeout(function() {announcement("Text");}, 1000);
+	announcement("Sample Announcemnt Text");
+	//setTimeout(function() {announcement("Text");}, 1000);
 }
 
 main(); // always run main to start service

@@ -2,13 +2,15 @@
 :root {
 	--bg-color: #2f3c63;
 	--fg-color: white;
-	--font: "Comic Sans MS";
+	--font: "Roboto";
+	--font-1: "Open Sans";
+	--font-2: "sans-serif";
 }
 
 body {
 	background: var(--bg-color);
 	color: var(--fg-color);
-	font-family: var(--font);
+	font-family: var(--font), var(--font-1), var(--font-2);
 }
 
 /* IMPORTANT: These are default values of time only display, will be overriden by JS */
