@@ -11,6 +11,8 @@ var countClock = document.getElementById("count-clock");
 var realClock = document.getElementById("real-clock");
 var announcementDiv = document.getElementById("announcement");
 var bar = document.getElementById("bar");
+var displaying = false;
+var queue = []; 
 
 function updateTime(){
 	var dateNow = new Date();
@@ -56,6 +58,7 @@ function updateTime(){
 }
 
 function setDisplayTimeOnly() {
+	displaying = false;
 
 	// displays only the countdown clock and the real time clock, sets any announcement to empty string 
 	countClock.style.display = "block";
@@ -79,7 +82,7 @@ function setDisplayTimeOnly() {
 function announcement(announcementText) {	
 	// displays the time remaining in small, and the announcement text
 	// AUTOMATICALLY RESETS AFTER TIMEOUT
-
+	displaying = true;
 	// set display
 	countClock.style.display = "block";
 	realClock.style.display = "none";
@@ -100,15 +103,25 @@ function announcement(announcementText) {
 	document.body.style.color = alertForegroundColor;
 
 	setTimeout(setDisplayTimeOnly, displayTime);
+}
 
+function loop() {
+	// main logic for getting and pushing announcements
+	if (displaying == false) {
+		if (queue.length > 0) {
+			var announcementText = queue.shift();
+			console.log(announcementText);
+			announcement(announcementText);
+		}
+	}
+
+	setTimeout(loop, 1000);
 }
 
 function main() { // the display board logic
 	updateTime(); // the timers are always updated;
 	setDisplayTimeOnly(); // always start on default display
-	setTimeout(function() {announcement("sample")}, 3000);
-	// Announcement pulling logic
-	// TODO
+	loop();
 }
 
 main(); // always run main to start service

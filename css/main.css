@@ -64,7 +64,7 @@ body {
 #bar {
 	height: 20px;
 	width: 100%;
-	background-color: red;
+	background-color: var(--fg-color);
 	animation-name: bar-timer;
 	animation-duration: 30s;
 	animation-timing-function: linear;
